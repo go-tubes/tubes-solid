@@ -13,15 +13,15 @@ Client library for tubes
 Install it:
 
 ```bash
-npm i tubes-solid
+npm i @go-tubes/tubes-solid
 # or
-yarn add tubes-solid
+yarn add @go-tubes/tubes-solid
 # or
-pnpm add tubes-solid
+pnpm add @go-tubes/tubes-solid
 ```
 
 Use it:
 
 ```tsx
-import tubes-solid from 'tubes-solid'
+import { TubesProvider, TubesChannel } from '@go-tubes/tubes-solid'
 ```
