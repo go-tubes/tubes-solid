@@ -3,23 +3,30 @@ import { useTubes } from './provider';
 
 export type SendFunc = (payload: any) => Promise<void>;
 
-export const TubesChannel: Component<{ children?: (send: Accessor<SendFunc>) => JSX.Element, channel: string, onMessage?: (payload: any) => void }> = props => {
+const undefinedSendFunc: SendFunc = (_: any) => Promise.reject("Tubes Client not found. Did you wrap TubesChannel in a TubesProvider?")
+
+export const TubesChannel: Component<{ children?: (payload: Accessor<any>, send: Accessor<SendFunc>) => JSX.Element, channel: string, onMessage?: (payload: any) => void }> = props => {
   const tubes = useTubes()
-  const [send, setSend] = createSignal<SendFunc>((_: any) => Promise.reject("Tubes Client not found. Did you wrap TubesChannel in a TubesProvider?"))
+  const [send, setSend] = createSignal<SendFunc>(undefinedSendFunc)
+  const [lastPayload, setLastPayload] = createSignal<any>(null)
 
   createEffect(() => {
-    tubes?.subscribeChannel(props.channel, props.onMessage)
-    const sendFunction: SendFunc = (payload: any) => tubes?.send(props.channel, { payload }) ?? Promise.reject("Tubes Client not found. Did you wrap TubesChannel in a TubesProvider?");
+    const onMessageHandler = (payload: any) => {
+      if (props.onMessage) props.onMessage(payload);
+      setLastPayload(payload);
+    };
+    tubes?.subscribeChannel(props.channel, onMessageHandler)
+    const sendFunction: SendFunc = (payload: any) => tubes?.send(props.channel, { payload }) ?? undefinedSendFunc(payload);
     setSend(() => sendFunction);
     
     onCleanup(() => {
-      tubes?.unsubscribeChannel(props.channel, {});
+      tubes?.unregisterHandler(props.channel, onMessageHandler);
     })
   })
 
   return (
     <>
-      {props?.children?.(send)}
+      {props?.children?.(send, lastPayload)}
     </>
   )
 }
