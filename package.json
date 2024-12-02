@@ -1,6 +1,6 @@
 {
   "name": "@go-tubes/tubes-solid",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "Client library for tubes",
   "license": "MIT",
   "author": "go-tubes",
@@ -85,6 +85,6 @@
     "pnpm": ">=8.0.0"
   },
   "dependencies": {
-    "@go-tubes/tubes-js": "^0.0.2"
+    "@go-tubes/tubes-js": "^0.0.3"
   }
 }

@@ -15,12 +15,12 @@ export const TubesChannel: Component<{ children?: (payload: Accessor<any>, send:
       if (props.onMessage) props.onMessage(payload);
       setLastPayload(payload);
     };
-    tubes?.subscribeChannel(props.channel, onMessageHandler)
+    tubes?.subscribe(props.channel, onMessageHandler)
     const sendFunction: SendFunc = (payload: any) => tubes?.send(props.channel, { payload }) ?? undefinedSendFunc(payload);
     setSend(() => sendFunction);
     
     onCleanup(() => {
-      tubes?.unregisterHandler(props.channel, onMessageHandler);
+      tubes?.unsubscribe(props.channel, onMessageHandler);
     })
   })
 

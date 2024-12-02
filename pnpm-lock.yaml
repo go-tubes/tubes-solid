@@ -6,8 +6,8 @@ settings:
 
 dependencies:
   '@go-tubes/tubes-js':
-    specifier: ^0.0.2
-    version: 0.0.2
+    specifier: ^0.0.3
+    version: 0.0.3
 
 devDependencies:
   '@types/node':
@@ -842,8 +842,8 @@ packages:
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
     dev: true
 
-  /@go-tubes/tubes-js@0.0.2:
-    resolution: {integrity: sha512-00DZKWNLcCN6zDI6f8R+BLuTbpRERN+hs+4OcsYtuJ5Y8oxKelXx+/BkOGljZreIAO9Q5rO8K1UIRwViqURVAg==}
+  /@go-tubes/tubes-js@0.0.3:
+    resolution: {integrity: sha512-lnk7s2VBt8y4rd18LW/AElQzCq/sPPD1ky9/tY0nejeFb9hgzJKH4pxKDwfH7MU8L++x5Pu4WXeg33+BZeM5Hw==}
     dev: false
 
   /@humanwhocodes/config-array@0.13.0:
